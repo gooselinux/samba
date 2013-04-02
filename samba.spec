@@ -5,7 +5,7 @@
 #%define pre_release rc3
 %define pre_release %nil
 
-%define samba_release %{main_release}%{pre_release}%{?dist}.1
+%define samba_release %{main_release}%{pre_release}%{?dist}.2
 
 %define samba_source source3
 Summary: Server and Client software to interoperate with Windows machines
@@ -51,6 +51,7 @@ Patch204: samba-3.5.4-winbind-schannel.patch
 Patch205: samba-3.5.4-offline_cache.patch
 Patch206: samba-3.5.4-winbind_default_domain.patch
 Patch207: samba-3.5.4-CVE-2010-3069.patch
+Patch208: samba-3.5.7-CVE-2011-0719.patch
 
 Requires(pre): samba-common = %{epoch}:%{samba_version}-%{release}
 Requires(pre): samba-winbind-clients = %{epoch}:%{samba_version}-%{release}
@@ -217,6 +218,7 @@ cp %{SOURCE11} packaging/Fedora/
 %patch205 -p1 -b .offline_cache
 %patch206 -p1 -b .winbind_default_domain
 %patch207 -p1 -b .CVE-2010-3069
+%patch208 -p1 -b .CVE-2011-0719
 
 mv %samba_source/VERSION %samba_source/VERSION.orig
 sed -e 's/SAMBA_VERSION_VENDOR_SUFFIX=$/&\"%{samba_release}\"/' < %samba_source/VERSION.orig > %samba_source/VERSION
@@ -654,6 +656,10 @@ exit 0
 %{_datadir}/pixmaps/samba/logo-small.png
 
 %changelog
+* Fri Feb 18 2011 Guenther Deschner <gdeschner@redhat.com> - 3.5.4-68.2
+- Security Release, fixes CVE-2011-0719
+- resolves: #678334
+
 * Thu Sep 09 2010 Guenther Deschner <gdeschner@redhat.com> - 3.5.4-68.1
 - Security Release, fixes CVE-2010-3069
 - resolves: #632264
