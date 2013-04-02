@@ -5,7 +5,7 @@
 #%define pre_release rc3
 %define pre_release %nil
 
-%define samba_release %{main_release}%{pre_release}%{?dist}
+%define samba_release %{main_release}%{pre_release}%{?dist}.1
 
 %define samba_source source3
 Summary: Server and Client software to interoperate with Windows machines
@@ -50,6 +50,7 @@ Patch203: samba-3.5.2-pidfile_fdleak.patch
 Patch204: samba-3.5.4-winbind-schannel.patch
 Patch205: samba-3.5.4-offline_cache.patch
 Patch206: samba-3.5.4-winbind_default_domain.patch
+Patch207: samba-3.5.4-CVE-2010-3069.patch
 
 Requires(pre): samba-common = %{epoch}:%{samba_version}-%{release}
 Requires(pre): samba-winbind-clients = %{epoch}:%{samba_version}-%{release}
@@ -215,6 +216,7 @@ cp %{SOURCE11} packaging/Fedora/
 %patch204 -p1 -b .winbind_schannel
 %patch205 -p1 -b .offline_cache
 %patch206 -p1 -b .winbind_default_domain
+%patch207 -p1 -b .CVE-2010-3069
 
 mv %samba_source/VERSION %samba_source/VERSION.orig
 sed -e 's/SAMBA_VERSION_VENDOR_SUFFIX=$/&\"%{samba_release}\"/' < %samba_source/VERSION.orig > %samba_source/VERSION
@@ -652,6 +654,10 @@ exit 0
 %{_datadir}/pixmaps/samba/logo-small.png
 
 %changelog
+* Thu Sep 09 2010 Guenther Deschner <gdeschner@redhat.com> - 3.5.4-68.1
+- Security Release, fixes CVE-2010-3069
+- resolves: #632264
+
 * Tue Aug 24 2010 Guenther Deschner <gdeschner@redhat.com> - 3.5.4-68
 - Fix winbind offline mode
 - resolves: #626407

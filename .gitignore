@@ -1,13 +1,1 @@
-filter-requires-samba.sh
-pam_winbind.conf
-nmb.init
-smb.conf.default
-winbind.init
-smbprint
-samba.pamd
-smb.init
-samba.sysconfig
-swat.desktop
-samba.xinetd
-samba.log
 samba-3.5.4.tar.gz
